@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
-from sqlalchemy import create_engine
+
 from environment_data import *
 import sqlite3
 import numpy as np
@@ -69,9 +69,9 @@ def load_dashboard():
             unsafe_allow_html=True
         )
 
-        engine = create_engine(f"sqlite:///{db_config['db_path']}")
-        conn = engine.connect()
-
+        #engine = create_engine(f"sqlite:///{db_config['db_path']}")
+        #conn = engine.connect()
+        conn = sqlite3.connect(db_config['db_path'])
         query = """
         WITH RankedData AS (
             SELECT
@@ -314,8 +314,9 @@ def load_dashboard():
 def load_hot_cake():
     @st.cache_data
     def fetch_data(date_str, db_config):
-        engine = create_engine(f"sqlite:///{db_config['db_path']}")
-        conn = engine.connect()
+        #engine = create_engine(f"sqlite:///{db_config['db_path']}")
+        #conn = engine.connect()
+        conn = sqlite3.connect(db_config['db_path'])
 
         query = """
         WITH RankedData AS (
@@ -1070,7 +1071,6 @@ if 'page' in st.session_state:
 
                 st.write("Data Uploading Complete")
 def Create_check_db():
-    print("DB Creation Started")
     db_path = db_config['db_path']
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
@@ -1083,11 +1083,7 @@ def Create_check_db():
     conn.commit()
     cursor.close()
     conn.close()
-    print("DB Created")                
 
-def app():
-    print("APP function called")
-    
 
 # Load default content if no button is clicked
 Create_check_db()
@@ -1097,7 +1093,3 @@ if 'default' not in st.session_state:
     st.session_state['default'] = True
     load_dashboard()
 
-if __name__ == "__main__":
-    app()
-   # os.system("streamlit run main.py --server.port=8501 &")
-   # os.system("streamlit run symbol_app.py --server.port=8502")

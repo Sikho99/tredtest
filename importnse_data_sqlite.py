@@ -58,9 +58,9 @@ def StoreDataintoDBSqlite(db_path, Start_date, End_date, Cur_date, CSV_file_path
                             conn.commit()
                             cursor.execute("INSERT INTO NSEData_date (Date1) VALUES (?)", (file_date,))
                             conn.commit()
-                            print(f"Data inserted successfully from : {CSV_file_path}.")
+                            print(f"Data inserted successfully From : {file_date}")
                         else:
-                            print(f"Data present in database of Date  {file_date}.")
+                            print(f"Data present in database of Date:{file_date}")
                             file_date_present=True
         else:
             try:
@@ -89,9 +89,9 @@ def StoreDataintoDBSqlite(db_path, Start_date, End_date, Cur_date, CSV_file_path
                     conn.commit()
                     cursor.execute("INSERT INTO NSEData_date (Date1) VALUES (?)", (file_date,))
                     conn.commit()
-                    print(f"Data inserted successfully from : {CSV_file_path}.")
+                    print(f"Data inserted successfully from : {CSV_file_path}")
                 else:
-                        print(f"Data present in database of Date  {file_date}.")
+                        print(f"Data present in database of Date:{file_date}")
                         file_date_present=True
             except Exception as e:
                 print(f"Error processing file: {e}")
@@ -124,19 +124,19 @@ def StoreDataintoDBSqlite(db_path, Start_date, End_date, Cur_date, CSV_file_path
                 conn.commit()
                 cursor.execute("INSERT INTO NSEData_date (Date1) VALUES (?)", (file_date,))
                 conn.commit()
-                print(f"Data inserted successfully from : {CSV_file_path}.")
+                print(f"Data inserted successfully")
             else:
-                    print(f"Data present in database of Date  {file_date}.")
+                    print(f"Data present in database of Date")
                     file_date_present=True
         else:
-            print(f"Online data of {CSV_file_path} csv data is none")
+            print(f"No online data found for date {CSV_file_path}")
 
     cursor.close()
     conn.close()
 
     if file_date_present==False and Series_EQ ==True:
         perform_calculations_and_store(db_path, Cur_date)
-        print("All data has been successfully loaded and calculations performed.")
+     #   print("All data has been successfully loaded and calculations performed.")
 
 def perform_calculations_and_store(db_path, Cur_date):
     conn = sqlite3.connect(db_path)

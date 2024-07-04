@@ -5,7 +5,6 @@ db_config = {
     'database': 'NSEALL',
     'db_type':'sqlit',
     'db_path':'NSEALLDATA.db',
-
  }
 app_config = {
     'base_symbol_url':"https://tradedata-symbol.streamlit.app/",
