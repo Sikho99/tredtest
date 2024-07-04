@@ -7,6 +7,7 @@ db_config = {
     'db_path':'NSEALLDATA.db',
  }
 app_config = {
+    
     'base_symbol_url':"https://tradetesting-symbol.streamlit.app",
     #'base_symbol_url': 'http://localhost:8502'  # Change this to your Streamlit URL when deploying
     'max_retries': '3',
